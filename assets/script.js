@@ -8,6 +8,7 @@ var APIKey = "f7dedc0eea26524e68c239d8ed64d3d4"
 // var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 // console.log(queryURL)
 
+// Takes whatever you return and wraps it around a promise
 async function getweatherdata(city) {
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 console.log(queryURL)
@@ -17,10 +18,16 @@ console.log(queryURL)
     // Extract json data from the response object
     const weatherData = await response.json();
     console.log(weatherData)
+    return weatherData;
 }
 
-getweatherdata(city)
+// var weather = getweatherdata('New York')
+// console.log("weather " + weather)
 
-// fetch.Button.addEventListener('click', await fetch)
+ClickMe.addEventListener('click', function(){
+// Grab city name from html and store into variable 
+// Call the getweatherdata function
+// Use weatherdata to populate the html 
+})
 
 // https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key};
