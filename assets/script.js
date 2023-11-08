@@ -1,9 +1,26 @@
-var APIKey = "9babcee9adb606a32ee486326d4cc19a"
+var ClickMe = document.getElementById('fetch-button');
+var UserInput = document.getElementById('cityname')
+var WeatherData = document.getElementById('weather-container')
+console.log(UserInput)
 
-var city;
+var APIKey = "f7dedc0eea26524e68c239d8ed64d3d4"
+// var city = "Atlanta"
+// var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
+// console.log(queryURL)
 
-var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
+async function getweatherdata(city) {
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
+console.log(queryURL)
+     // Stores data into a response object
+    const response = await fetch(queryURL)
+    console.log("hi " + response)
+    // Extract json data from the response object
+    const weatherData = await response.json();
+    console.log(weatherData)
+}
 
-fetch(queryURL)
+getweatherdata(city)
+
+// fetch.Button.addEventListener('click', await fetch)
 
 // https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key};
