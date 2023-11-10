@@ -18,16 +18,24 @@ console.log(queryURL)
     // Extract json data from the response object
     const weatherData = await response.json();
     console.log(weatherData)
-    return weatherData;
+    var humidity = weatherData.main.humidity
+var temperature = weatherData.main.temperature
+console.log(humidity, temperature)
+// var wind =
+    return {humidity, temperature, wind}
+
 }
+// extract humidity, etc
 
-// var weather = getweatherdata('New York')
-// console.log("weather " + weather)
-
-ClickMe.addEventListener('click', function(){
+ClickMe.addEventListener('click', async function(){
+// console.log(UserInput.value)
 // Grab city name from html and store into variable 
+var CityName = UserInput.value;
 // Call the getweatherdata function
+var weather = await getweatherdata(CityName);
+console.log("weather " + weather);
 // Use weatherdata to populate the html 
 })
+// create element, set innerText temp, humdiity, wind 
 
 // https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key};
