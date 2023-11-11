@@ -2,7 +2,7 @@ var ClickMe = document.getElementById('fetch-button');
 var UserInput = document.getElementById('cityname')
 var WeatherData = document.getElementById('weather-container')
 console.log(UserInput)
-// var 5DayWeatherData = document.getElementById('5dayweather-container')
+var ForecastyWeatherData = document.getElementById('5dayweather-container')
 
 var APIKey = "f7dedc0eea26524e68c239d8ed64d3d4"
 // var city = "Atlanta"
@@ -50,7 +50,23 @@ currentWeatherHeader.append(cityNameEl,dateEl,Icon)
 document.getElementById('weather-container').append(currentWeatherHeader, Temp, Humidity, windSpeed)
 }
 
+async function getmoreweatherdata(lat) {
+    var anotherqueryURL = "api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
+console.log(anotherqueryURL)
+     // Stores data into a response object
+    const response = await fetch(anotherqueryURL)
+    console.log("hi " + response)
+    // Extract json data from the response object
+    const moreweatherData = await response.json();
+    console.log(moreweatherData)
+    var humidity = moreweatherData.main.humidity
+var temperature = moreweatherData.main.temp
+console.log(humidity, temperature)
+var wind = moreweatherData.wind.speed
+renderCurrentWeather(moreweatherData)
+    return {humidity, temperature, wind}
 
+}
 
 function saveSearchHistory() {
 
@@ -62,8 +78,6 @@ if (searchHistory.includes(city)) {
 searchHistory.push(city)
 localStorage.setItem('searchHistory', searchHistory)
 } 
-
-
 
 // extract humidity, etc
 
