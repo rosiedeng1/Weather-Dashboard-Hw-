@@ -19,12 +19,49 @@ console.log(queryURL)
     const weatherData = await response.json();
     console.log(weatherData)
     var humidity = weatherData.main.humidity
-var temperature = weatherData.main.temperature
+var temperature = weatherData.main.temp
 console.log(humidity, temperature)
-// var wind =
+var wind = weatherData.wind.speed
+renderCurrentWeather(weatherData)
     return {humidity, temperature, wind}
 
 }
+
+function renderCurrentWeather(data) {
+var currentWeatherHeader = document.createElement("div")
+var cityNameEl = document.createElement("h2")
+var dateEl = document.createElement("h2")
+var Icon = document.createElement("img")
+var Temp = document.createElement("p")
+var Humidity = document.createElement("p")
+var windSpeed = document.createElement("p")
+
+cityNameEl.textContent = data.name 
+dateEl.textContent = dayjs.unix(data.dt).format('MM DD, YYYY')
+Icon.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`
+Temp.textContent = data.main.temp
+Humidity.textContent = data.main.humidity 
+windSpeed.textContent = data.wind.speed
+
+currentWeatherHeader.style.display = 'flex'
+currentWeatherHeader.style.alignItems = 'center'
+currentWeatherHeader.append(cityNameEl,dateEl,Icon)
+document.getElementById('weather-container').append(currentWeatherHeader, Temp, Humidity, windSpeed)
+}
+
+function saveSearchHistory() {
+
+var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || []
+var city = UserInput.value
+if (searchHistory.includes(city)) {
+    return 
+}
+searchHistory.push(city)
+localStorage.setItem('searchHistory', searchHistory)
+} 
+
+
+
 // extract humidity, etc
 
 ClickMe.addEventListener('click', async function(){
@@ -34,8 +71,11 @@ var CityName = UserInput.value;
 // Call the getweatherdata function
 var weather = await getweatherdata(CityName);
 console.log("weather " + weather);
+saveSearchHistory()
 // Use weatherdata to populate the html 
 })
 // create element, set innerText temp, humdiity, wind 
+
+
 
 // https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key};
