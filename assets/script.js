@@ -2,6 +2,7 @@ var ClickMe = document.getElementById('fetch-button');
 var UserInput = document.getElementById('cityname')
 var WeatherData = document.getElementById('weather-container')
 console.log(UserInput)
+// var 5DayWeatherData = document.getElementById('5dayweather-container')
 
 var APIKey = "f7dedc0eea26524e68c239d8ed64d3d4"
 // var city = "Atlanta"
@@ -10,7 +11,7 @@ var APIKey = "f7dedc0eea26524e68c239d8ed64d3d4"
 
 // Takes whatever you return and wraps it around a promise
 async function getweatherdata(city) {
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + APIKey;
 console.log(queryURL)
      // Stores data into a response object
     const response = await fetch(queryURL)
@@ -48,6 +49,8 @@ currentWeatherHeader.style.alignItems = 'center'
 currentWeatherHeader.append(cityNameEl,dateEl,Icon)
 document.getElementById('weather-container').append(currentWeatherHeader, Temp, Humidity, windSpeed)
 }
+
+
 
 function saveSearchHistory() {
 
