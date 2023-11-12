@@ -122,7 +122,7 @@ ClickMe.addEventListener('click', async function () {
         console.log("am i in this block")
         var forecastWeather = await getmoreweatherdata(currentWeather.coord.lat, currentWeather.coord.lon);
         renderFiveDayForecast(forecastWeather);
-        console(forecastWeather)
+        console.log(forecastWeather)
     }
     saveSearchHistory();
 });
