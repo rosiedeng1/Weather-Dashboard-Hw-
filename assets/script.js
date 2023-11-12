@@ -12,7 +12,7 @@ var APIKey = "f7dedc0eea26524e68c239d8ed64d3d4"
 
 // Takes whatever you return and wraps it around a promise
 async function getweatherdata(city) {
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + APIKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + APIKey;
 console.log(queryURL)
      // Stores data into a response object
     const response = await fetch(queryURL)
@@ -86,8 +86,22 @@ function renderFiveDayForecast(forecastData) {
         const dailyData = forecastData.list[i];
         // Create and append HTML elements for each day
         // e.g., date, temperature, humidity, etc.
-    }
+        var dateEl = document.createElement("h2")
+        var Icon = document.createElement("img")
+        var Temp = document.createElement("p")
+        var Humidity = document.createElement("p")
+        var windSpeed = document.createElement("p")
+
+        dateEl.textContent = dayjs.unix(data.dt).format('MM DD, YYYY')
+Icon.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`
+Temp.textContent = list.main.temp
+Humidity.textContent = list.main.humidity 
+windSpeed.textContent = list.wind.speed
+
+document.getElementById('weather-container').append(ateEl,Icon, Temp, Humidity, windSpeed)
 }
+    }
+
 
 ClickMe.addEventListener('click', async function() {
     var CityName = UserInput.value;
