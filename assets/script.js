@@ -9,6 +9,7 @@ var APIKey = "f7dedc0eea26524e68c239d8ed64d3d4"
 // var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 // console.log(queryURL)
 
+
 // Takes whatever you return and wraps it around a promise
 async function getweatherdata(city) {
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + APIKey;
@@ -50,8 +51,9 @@ currentWeatherHeader.append(cityNameEl,dateEl,Icon)
 document.getElementById('weather-container').append(currentWeatherHeader, Temp, Humidity, windSpeed)
 }
 
-async function getmoreweatherdata(lat) {
-    var anotherqueryURL = "api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
+async function getmoreweatherdata(city) {
+    // var anotherqueryURL = "api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
+    var anotherqueryURL = "api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + city + "&appid=" + APIKey;
 console.log(anotherqueryURL)
      // Stores data into a response object
     const response = await fetch(anotherqueryURL)
@@ -59,10 +61,11 @@ console.log(anotherqueryURL)
     // Extract json data from the response object
     const moreweatherData = await response.json();
     console.log(moreweatherData)
-    var humidity = moreweatherData.main.humidity
-var temperature = moreweatherData.main.temp
+    var lat = moreweatherData.coord.lat
+    var humidity = moreweatherData.list.main.humidity
+var temperature = moreweatherData.list.main.temp
 console.log(humidity, temperature)
-var wind = moreweatherData.wind.speed
+var wind = moreweatherData.list.wind.speed
 renderCurrentWeather(moreweatherData)
     return {humidity, temperature, wind}
 
