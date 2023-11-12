@@ -51,9 +51,21 @@ currentWeatherHeader.append(cityNameEl,dateEl,Icon)
 document.getElementById('weather-container').append(currentWeatherHeader, Temp, Humidity, windSpeed)
 }
 
-async function getmoreweatherdata(city) {
+ClickMe.addEventListener('click', async function(){
+    // console.log(UserInput.value)
+    // Grab city name from html and store into variable 
+    var CityName = UserInput.value;
+    // Call the getweatherdata function
+    var weather = await getweatherdata(CityName);
+    console.log("weather " + weather);
+    saveSearchHistory()
+    // Use weatherdata to populate the html 
+    })
+    // create element, set innerText temp, humdiity, wind 
+    
+async function getmoreweatherdata(lat, lon) {
     // var anotherqueryURL = "api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
-    var anotherqueryURL = "api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + city + "&appid=" + APIKey;
+    var anotherqueryURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
 console.log(anotherqueryURL)
      // Stores data into a response object
     const response = await fetch(anotherqueryURL)
@@ -61,15 +73,31 @@ console.log(anotherqueryURL)
     // Extract json data from the response object
     const moreweatherData = await response.json();
     console.log(moreweatherData)
-    var lat = moreweatherData.coord.lat
-    var humidity = moreweatherData.list.main.humidity
-var temperature = moreweatherData.list.main.temp
-console.log(humidity, temperature)
-var wind = moreweatherData.list.wind.speed
-renderCurrentWeather(moreweatherData)
-    return {humidity, temperature, wind}
+    return moreweatherData;
 
 }
+
+function renderFiveDayForecast(forecastData) {
+    // Clear previous content
+    ForecastyWeatherData.innerHTML = '';
+
+    // Loop through forecast data (every 8th item for daily forecast)
+    for (let i = 0; i < forecastData.list.length; i += 8) {
+        const dailyData = forecastData.list[i];
+        // Create and append HTML elements for each day
+        // e.g., date, temperature, humidity, etc.
+    }
+}
+
+ClickMe.addEventListener('click', async function() {
+    var CityName = UserInput.value;
+    var currentWeather = await getweatherdata(CityName);
+    if (currentWeather && currentWeather.coord) {
+        var forecastWeather = await getmoreweatherdata(currentWeather.coord.lat, currentWeather.coord.lon);
+        renderFiveDayForecast(forecastWeather);
+    }
+    saveSearchHistory();
+});
 
 function saveSearchHistory() {
 
@@ -84,17 +112,6 @@ localStorage.setItem('searchHistory', searchHistory)
 
 // extract humidity, etc
 
-ClickMe.addEventListener('click', async function(){
-// console.log(UserInput.value)
-// Grab city name from html and store into variable 
-var CityName = UserInput.value;
-// Call the getweatherdata function
-var weather = await getweatherdata(CityName);
-console.log("weather " + weather);
-saveSearchHistory()
-// Use weatherdata to populate the html 
-})
-// create element, set innerText temp, humdiity, wind 
 
 
 
