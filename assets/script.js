@@ -6,10 +6,6 @@ var ForecastWeatherData = document.getElementById('5dayweather-container')
 var searchHistory = document.getElementById('search-history')
 
 var APIKey = "f7dedc0eea26524e68c239d8ed64d3d4"
-// var city = "Atlanta"
-// var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
-// console.log(queryURL)
-
 
 // Takes whatever you return and wraps it around a promise
 async function getweatherdata(city) {
@@ -45,7 +41,8 @@ function renderCurrentWeather(data) {
     var windSpeed = document.createElement("p")
 
     cityNameEl.textContent = data.name
-    dateEl.textContent = dayjs.unix(data.dt).format('MM DD, YYYY')
+    dateEl.textContent = dayjs.unix(data.dt).format('MM. DD. YYYY')
+    // Extract icon, humidity, temp and windSpeed data from the API
     Icon.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`
     Temp.textContent = data.main.temp
     Humidity.textContent = data.main.humidity
@@ -53,6 +50,7 @@ function renderCurrentWeather(data) {
 
     currentWeatherHeader.style.display = 'flex'
     currentWeatherHeader.style.alignItems = 'center'
+    // Append the desired weather data to the page
     currentWeatherHeader.append(cityNameEl, dateEl, Icon)
     document.getElementById('weather-container').append(currentWeatherHeader, Temp, Humidity, windSpeed)
 }
@@ -92,7 +90,7 @@ function renderFiveDayForecast(forecastData) {
         var Humidity = document.createElement("p")
         var windSpeed = document.createElement("p")
         // console.log("what day is it " + dailyData.dt)
-        dateEl.textContent = dayjs.unix(dailyData.dt).format('MM DD, YYYY')
+        dateEl.textContent = dayjs.unix(dailyData.dt).format('MM. DD. YYYY')
         // console.log("is the icon there " + dailyData.weather[0].icon)
         Icon.src = `http://openweathermap.org/img/w/${dailyData.weather[0].icon}.png`
         Temp.textContent = dailyData.main.temp
@@ -103,17 +101,6 @@ function renderFiveDayForecast(forecastData) {
         ForecastWeatherData.append(dateEl, Icon, Temp, Humidity, windSpeed)
     }
 }
-
-// ClickMe.addEventListener('click', async function () {
-//     // console.log(UserInput.value)
-//     // Grab city name from html and store into variable 
-//     var CityName = UserInput.value;
-//     // Call the getweatherdata function
-//     var weather = await getweatherdata(CityName);
-//     console.log("weather " + weather);
-//     saveSearchHistory()
-//     // Use weatherdata to populate the html 
-// })
 
 ClickMe.addEventListener('click', async function () {
     var cityName = UserInput.value;
@@ -189,7 +176,6 @@ function renderSearchHistory(citySearchHistory) {
 
 
 }
-// extract humidity, etc
 
 
 // https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key};

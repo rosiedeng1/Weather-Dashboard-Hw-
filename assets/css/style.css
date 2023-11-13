@@ -9,11 +9,6 @@ body {
     color: white;
 }
 
-#app {
-    display: flex;
-
-}
-
 #weather-container {
     border: 1px solid grey 
 }
@@ -25,4 +20,9 @@ body {
     margin: 100px;
 
 
+}
+
+.forecast img {
+    width: 50px;
+    height: 100%;
 }
