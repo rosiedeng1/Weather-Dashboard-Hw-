@@ -5,18 +5,23 @@ body {
     h1{
     display: flex;
     justify-content: center;
-    background-color: rgb(38, 76, 173);
+    background-color: blue;
     color: white;
 }
 
+h3, h4 {
+    font-family: papyrus;
+    font-size: 20px;
+}
+/* Created border around weather container */
 #weather-container {
-    border: 1px solid grey;
+    border: 2px solid grey;
     text-wrap: wrap;
+    width: 300px;
     
 }
 
 .forecast {
-    border: 1px solid grey;
     display: flex;
     flex-direction: row;
     margin: 100px;
@@ -24,7 +29,12 @@ body {
 
 }
 
+/* added a border to each day's weather in the forecast */
+.forecast div {
+    border: 2px solid grey;
+    margin: 10px;
+}
 .forecast img {
     width: 50px;
-    height: 100%;
+    height: 20%;
 }

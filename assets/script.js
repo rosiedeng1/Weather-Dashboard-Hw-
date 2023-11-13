@@ -21,8 +21,6 @@ async function getweatherdata(city) {
     var humidity = weatherData.main.humidity
     var temperature = weatherData.main.temp
     var wind = weatherData.wind.speed
-    // var lat = weatherData.coord.lat
-    // var lon = weatherData.coord.lon
     // Set variable for coordinates-lat, lon
     var coord = weatherData.coord
     renderCurrentWeather(weatherData)
@@ -98,7 +96,8 @@ function renderFiveDayForecast(forecastData) {
         Humidity.textContent = 'Humidity' + dailyData.main.humidity
         windSpeed.textContent = 'Wind:' + dailyData.wind.speed
 
-        weatherContainer.appendChild(dateEl, Icon, Temp, Humidity, windSpeed)
+        // Created a div and appended the elements to that div 
+        weatherContainer.append(dateEl, Icon, Temp, Humidity, windSpeed)
         dateEl.style.display = 'flex'
         document.getElementById('5dayweather-container').append(weatherContainer)
     }

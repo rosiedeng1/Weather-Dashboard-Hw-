@@ -7,11 +7,15 @@ The motivation behind the project was to create a weather application for users 
 ## Usage
 Link to live site: https://rosiedeng1.github.io/Weather-Dashboard-Hw-/
 
-Provide instructions and examples for use. Include screenshots as needed.
+![SearchBarforCity](assets/images/SearchBarforCity.png)
+![CitySearch](assets/images/CitySearch.png)
+![SearchHistory](assets/images/SearchHistory.png)
+![LocalStorage](assets/images/LocalStorage.png)
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
-
-![alt text](assets/images/screenshot.png)
+Instructions for ![SearchBarforCity]: You can type in the name of a city that you want to get the current weather and forecast for. Click on the "click me" button to show the correpsonding weather for city 
+Instructions for ![CitySearch]: You can see the current weather conditions for that city, in this case is New York, which includes the date, temperature, humidity, and wind for that city. A 5 day forecast for that city's weather with similar details will appear 
+Instructions for ![SearchHistory]: A list of the cities you've searched for will appear in the search history. When you click on a city you've search for in the past on the button, for example in this case Boston, you will see the weather conditions and the 5 day forecast for that city appear. 
+Instructions for ![LocalStorage]: When you inspect the application in the browser, you will see the list of cities you've searched for saved in the local storage 
 
 ## Credits
 
