@@ -46,8 +46,8 @@ function renderCurrentWeather(data) {
     // Extract icon, humidity, temp and windSpeed data from the API
     Icon.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`
     Temp.textContent = 'Temperature:' + data.main.temp + '°F'
-    Humidity.textContent = 'Humidity' + data.main.humidity
-    windSpeed.textContent = 'Wind:' + data.wind.speed
+    Humidity.textContent = 'Humidity' + data.main.humidity + '%'
+    windSpeed.textContent = 'Wind:' + data.wind.speed + 'MPH'
 
     currentWeatherHeader.style.display = 'flex'
     currentWeatherHeader.style.alignItems = 'center'
@@ -93,8 +93,8 @@ function renderFiveDayForecast(forecastData) {
         // console.log("is the icon there " + dailyData.weather[0].icon)
         Icon.src = `http://openweathermap.org/img/w/${dailyData.weather[0].icon}.png`
         Temp.textContent = 'Temperature:' + dailyData.main.temp + '°F'
-        Humidity.textContent = 'Humidity' + dailyData.main.humidity
-        windSpeed.textContent = 'Wind:' + dailyData.wind.speed
+        Humidity.textContent = 'Humidity' + dailyData.main.humidity + '%'
+        windSpeed.textContent = 'Wind:' + dailyData.wind.speed + 'MPH'
 
         // Created a div and appended the elements to that div 
         weatherContainer.append(dateEl, Icon, Temp, Humidity, windSpeed)

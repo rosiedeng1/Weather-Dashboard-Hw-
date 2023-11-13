@@ -17,22 +17,21 @@ h3, h4 {
 #weather-container {
     border: 2px solid grey;
     text-wrap: wrap;
-    width: 300px;
+    width: 800px;
     
 }
 
 .forecast {
     display: flex;
     flex-direction: row;
-    margin: 100px;
-
-
+    margin: 20px;
 }
 
 /* added a border to each day's weather in the forecast */
 .forecast div {
     border: 2px solid grey;
     margin: 10px;
+    background-color: rgb(111, 111, 207);
 }
 .forecast img {
     width: 50px;
