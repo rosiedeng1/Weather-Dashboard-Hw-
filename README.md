@@ -18,6 +18,7 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 How to use fetch API: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 JSON stringify: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
 Create element method: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+Array includes method: https://www.w3schools.com/JSREF/jsref_includes_array.asp
 ## License
 
 Please refer to the LICENSE in the repo.

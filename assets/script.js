@@ -23,6 +23,7 @@ async function getweatherdata(city) {
     var wind = weatherData.wind.speed
     // var lat = weatherData.coord.lat
     // var lon = weatherData.coord.lon
+    // Set variable for coordinates-lat, lon
     var coord = weatherData.coord
     renderCurrentWeather(weatherData)
     return { humidity, temperature, wind, coord }
@@ -30,8 +31,10 @@ async function getweatherdata(city) {
 }
 
 function renderCurrentWeather(data) {
+    // Clears previous content in weather container when you input new city
     WeatherData.innerHTML = '';
 
+    // Created elements so you can put it/append it somewhere into weather-container ID
     var currentWeatherHeader = document.createElement("div")
     var cityNameEl = document.createElement("h2")
     var dateEl = document.createElement("h2")
@@ -41,12 +44,12 @@ function renderCurrentWeather(data) {
     var windSpeed = document.createElement("p")
 
     cityNameEl.textContent = data.name
-    dateEl.textContent = dayjs.unix(data.dt).format('MM. DD. YYYY')
+    dateEl.textContent = dayjs.unix(data.dt).format(('MM. DD. YYYY'))
     // Extract icon, humidity, temp and windSpeed data from the API
     Icon.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`
-    Temp.textContent = data.main.temp
-    Humidity.textContent = data.main.humidity
-    windSpeed.textContent = data.wind.speed
+    Temp.textContent = 'Temperature:' + data.main.temp + '°F'
+    Humidity.textContent = 'Humidity' + data.main.humidity
+    windSpeed.textContent = 'Wind:' + data.wind.speed
 
     currentWeatherHeader.style.display = 'flex'
     currentWeatherHeader.style.alignItems = 'center'
@@ -55,11 +58,8 @@ function renderCurrentWeather(data) {
     document.getElementById('weather-container').append(currentWeatherHeader, Temp, Humidity, windSpeed)
 }
 
-
-// create element, set innerText temp, humdiity, wind 
-
+// Fetched the data for the five day forecast 
 async function getmoreweatherdata(lat, lon) {
-    // var anotherqueryURL = "api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
     var anotherqueryURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial" + "&appid=" + APIKey;
     // console.log(anotherqueryURL)
     // Stores data into a response object
@@ -74,7 +74,7 @@ async function getmoreweatherdata(lat, lon) {
 
 function renderFiveDayForecast(forecastData) {
     // console.log("am i in renderFiveDayForecast function")
-    // Clear previous content
+    // Clears previous content
     ForecastWeatherData.innerHTML = '';
 
     // Loop through forecast data (every 8th item for daily forecast to get data for new day (3x8=24))
@@ -82,7 +82,7 @@ function renderFiveDayForecast(forecastData) {
     for (let i = 0; i < forecastData.list.length; i += 8) {
 
         const dailyData = forecastData.list[i];
-        // Create and append HTML elements for each day
+        // Created and append HTML elements for each day
         // e.g., date, temperature, humidity, etc.
         var dateEl = document.createElement("h2")
         var Icon = document.createElement("img")
@@ -93,17 +93,19 @@ function renderFiveDayForecast(forecastData) {
         dateEl.textContent = dayjs.unix(dailyData.dt).format('MM. DD. YYYY')
         // console.log("is the icon there " + dailyData.weather[0].icon)
         Icon.src = `http://openweathermap.org/img/w/${dailyData.weather[0].icon}.png`
-        Temp.textContent = dailyData.main.temp
-        Humidity.textContent = dailyData.main.humidity
-        windSpeed.textContent = dailyData.wind.speed
+        Temp.textContent = 'Temperature:' + dailyData.main.temp + '°F'
+        Humidity.textContent = 'Humidity' + dailyData.main.humidity
+        windSpeed.textContent = 'Wind:' + dailyData.wind.speed
 
         dateEl.style.display = 'flex'
         ForecastWeatherData.append(dateEl, Icon, Temp, Humidity, windSpeed)
     }
 }
 
+// Added event listener for button to retrieve weather data
 ClickMe.addEventListener('click', async function () {
     var cityName = UserInput.value;
+    // Normalizes to upper case when inputing city name 
     cityName = cityName.toUpperCase();
     var currentWeather = await getweatherdata(cityName);
     // console.log('currentWeather: ' + JSON.stringify(currentWeather))
@@ -119,6 +121,7 @@ ClickMe.addEventListener('click', async function () {
     saveSearchHistory(cityName);
 });
 
+// 
 function saveSearchHistory(cityName) {
     var key = 'cities'
     var cities = localStorage.getItem(key)
@@ -131,6 +134,7 @@ function saveSearchHistory(cityName) {
         // console.log("cities: " + cities)
         var newArray = JSON.parse(cities)
         if (!newArray.includes(cityName)) {
+            // Pushes current city input into your new array 
             newArray.push(cityName)
             var newArrayString = JSON.stringify(newArray)
             localStorage.setItem(key, newArrayString)
@@ -148,6 +152,7 @@ function renderSearchHistory(citySearchHistory) {
     // console.log("is searchHistory there " + citySearchHistory)
     searchHistory.innerHTML = ""
 
+    // Created for loop for the searchHistory buttons
     for (let i = 0; i < citySearchHistory.length; i++) {
         var currentCity = citySearchHistory[i];
         const button = document.createElement("button")
@@ -176,6 +181,3 @@ function renderSearchHistory(citySearchHistory) {
 
 
 }
-
-
-// https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key};
