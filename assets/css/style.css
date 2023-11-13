@@ -10,7 +10,9 @@ body {
 }
 
 #weather-container {
-    border: 1px solid grey 
+    border: 1px solid grey;
+    text-wrap: wrap;
+    
 }
 
 .forecast {

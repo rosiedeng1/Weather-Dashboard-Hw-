@@ -84,6 +84,7 @@ function renderFiveDayForecast(forecastData) {
         const dailyData = forecastData.list[i];
         // Created and append HTML elements for each day
         // e.g., date, temperature, humidity, etc.
+        var weatherContainer = document.createElement("div")
         var dateEl = document.createElement("h2")
         var Icon = document.createElement("img")
         var Temp = document.createElement("p")
@@ -97,8 +98,9 @@ function renderFiveDayForecast(forecastData) {
         Humidity.textContent = 'Humidity' + dailyData.main.humidity
         windSpeed.textContent = 'Wind:' + dailyData.wind.speed
 
+        weatherContainer.appendChild(dateEl, Icon, Temp, Humidity, windSpeed)
         dateEl.style.display = 'flex'
-        ForecastWeatherData.append(dateEl, Icon, Temp, Humidity, windSpeed)
+        document.getElementById('5dayweather-container').append(weatherContainer)
     }
 }
 
