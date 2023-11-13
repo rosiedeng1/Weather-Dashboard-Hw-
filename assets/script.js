@@ -99,6 +99,7 @@ function renderFiveDayForecast(forecastData) {
         Humidity.textContent = dailyData.main.humidity
         windSpeed.textContent = dailyData.wind.speed
 
+        dateEl.style.display = 'flex'
         ForecastWeatherData.append(dateEl, Icon, Temp, Humidity, windSpeed)
     }
 }
@@ -139,8 +140,8 @@ function saveSearchHistory(cityName) {
         var newValue = JSON.stringify(newArray)
         localStorage.setItem(key, newValue)
     } else {
-        // add city to an existing array of cities you have already visited ch
-        console.log("cities: " + cities)
+        // add city to an existing array of cities you have already visited
+        // console.log("cities: " + cities)
         var newArray = JSON.parse(cities)
         if (!newArray.includes(cityName)) {
             newArray.push(cityName)
@@ -165,7 +166,7 @@ function renderSearchHistory(citySearchHistory) {
         const button = document.createElement("button")
         button.textContent = currentCity;
         button.addEventListener("click", async function () {
-            var cityName = currentCity
+            var cityName = citySearchHistory[i]
 
             var currentWeather = await getweatherdata(cityName);
             console.log('currentWeather: ' + JSON.stringify(currentWeather))
@@ -188,27 +189,6 @@ function renderSearchHistory(citySearchHistory) {
 
 
 }
-
-
-
-// Save to local storage put cities into array 
-// add an event listener 
-// clear the current data 
-
-// ClickMe. addEventListener('click',function() {
-//     var cityName = UserInput.value;
-//     getweatherdata(cityName)
-//     getmoreweatherdata(cityName);
-// })
-
-// function renderSearchHistory(searchHistory) {
-//     console.log("am i in function")
-//     // Clear previous content
-//     searchHistory.innerHTML = '';
-//         for (let i=0; i<searchHistory.length; i++) {
-//         }
-// }
-
 // extract humidity, etc
 
 

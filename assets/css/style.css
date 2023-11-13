@@ -21,7 +21,8 @@ body {
 .forecast {
     border: 1px solid grey;
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: row;
+    margin: 100px;
 
 
 }
