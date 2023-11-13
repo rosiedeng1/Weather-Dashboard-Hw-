@@ -17,3 +17,11 @@ body {
 #weather-container {
     border: 1px solid grey 
 }
+
+.forecast {
+    border: 1px solid grey;
+    display: flex;
+    /* flex-direction: column; */
+
+
+}
